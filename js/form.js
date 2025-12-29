@@ -38,14 +38,22 @@ const hideModal = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const isTextFieldFocused = () =>
-  document.activeElement === hashtagField ||
-  document.activeElement === commentField;
+const onTextFieldKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
+};
+
+hashtagField.addEventListener('keydown', onTextFieldKeydown);
+commentField.addEventListener('keydown', onTextFieldKeydown);
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
-    evt.preventDefault();
-    hideModal();
+  if (isEscapeKey(evt)) {
+    const isErrorMessageExists = document.querySelector('.error');
+    if (!isErrorMessageExists) {
+      evt.preventDefault();
+      hideModal();
+    }
   }
 }
 

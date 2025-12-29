@@ -1,7 +1,15 @@
-import {getPictures} from './data.js';
 import {renderThumbnails} from './thumbnail.js';
 import {setUserFormSubmit, hideModal} from './form.js';
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 
-renderThumbnails(getPictures());
+getData(
+  (pictures) => {
+    renderThumbnails(pictures);
+  },
+  () => {
+    showAlert('Не удалось загрузить данные. Попробуйте обновить страницу');
+  }
+);
 
 setUserFormSubmit(hideModal);
