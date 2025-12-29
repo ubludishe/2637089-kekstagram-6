@@ -1,3 +1,4 @@
 import {getPictures} from './data.js';
+import {renderThumbnails} from './thumbnail.js';
 
-console.log(getPictures()); // eslint-disable-line no-console
+renderThumbnails(getPictures());
